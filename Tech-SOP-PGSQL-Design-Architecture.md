@@ -1,5 +1,6 @@
 Below is a production-oriented SOP tailored to the environment described below: 
 =============================================
+
 Ubuntu server: CPU 24 
 
 RAM 64 GB 
@@ -19,14 +20,23 @@ PostgreSQL’s current guidance, for example, describes about 25% of system RAM 
 # Production PostgreSQL Deployment, Configuration & Operations SOP
 
 **Document Type:** Technical Standard Operating Procedure
+
 **Platform:** Ubuntu Server 26.x
+
 **Database:** PostgreSQL 18.x
+
 **Environment:** Production
+
 **Server Capacity:** 24 CPU / 64 GB RAM / 8 TB HDD
+
 **Applications:** 5
+
 **Databases:** 10
+
 **Recommended PostgreSQL Instances:** 2
+
 **Document Owner:** Database / Infrastructure Team
+
 **Review Frequency:** Every 6 months and after major infrastructure or PostgreSQL changes
 
 ---
