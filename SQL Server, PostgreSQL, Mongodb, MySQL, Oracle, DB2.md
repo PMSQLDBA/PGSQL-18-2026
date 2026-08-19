@@ -2,29 +2,29 @@
 
 ## 1. Core Database Architecture
 
-| # | DBA Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
+| # | Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
 |---:|---|---|---|---|---|---|---|
-| 1 | Database engine | Database Engine | PostgreSQL Server | `mongod` | `mysqld` | Oracle Database | Db2 DB Manager |
-| 2 | Server process | SQL Server Service | `postgres` | `mongod` | `mysqld` | Oracle Instance | Db2 Instance |
-| 3 | Instance | SQL Instance | PG Cluster / Instance | `mongod` Instance | MySQL Instance | Oracle Instance | Db2 Instance |
-| 4 | Database | Database | Database | Database | Database / Schema | Database | Database |
-| 5 | Schema | Schema | Schema | Collection namespace | Database / Schema | User namespace | Schema |
+| 1 | Database engine | DB Engine | PG Server | `mongod` | `mysqld` | Oracle Database | Db2 Manager |
+| 2 | Server process | SQL Service | `postgres` | `mongod` | `mysqld` | Oracle Instance | Db2 Instance |
+| 3 | Instance | SQL Instance | PG Cluster | `mongod` Instance | MySQL Instance | Oracle Instance | Db2 Instance |
+| 4 | Database | Database | Database | Database | DB / Schema | Database | Database |
+| 5 | Schema | Schema | Schema | Namespace | DB / Schema | Schema | Schema |
 | 6 | Main config | `sp_configure` | `postgresql.conf` | `mongod.conf` | `my.cnf` / `my.ini` | SPFILE / PFILE | DBM / DB CFG |
-| 7 | Connection | TCP / Named Pipes | TCP / Unix socket | TCP | TCP / Unix socket | Listener / Service | TCP/IP |
+| 7 | Connection | TCP / Pipes | TCP / Socket | TCP | TCP / Socket | Listener / Service | TCP/IP |
 | 8 | Default port | 1433 | 5432 | 27017 | 3306 | 1521 | 50000* |
-| 9 | Metadata | System catalogs | System catalogs | System collections | `information_schema` | Data Dictionary | System Catalog |
-| 10 | Namespace | DB.Schema.Object | DB.Schema.Object | DB.Collection | DB.Table | Schema.Object | Schema.Object |
+| 9 | Metadata | Catalogs | Catalogs | Collections | `information_schema` | Dictionary | Catalog |
+| 10 | Namespace | DB.Schema.Obj | DB.Schema.Obj | DB.Collection | DB.Table | Schema.Obj | Schema.Obj |
 
 \* Db2 port is configurable; 50000 is commonly used.
 
 ## 2. Storage Terminology
 
-| # | DBA Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
+| # | Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
 |---:|---|---|---|---|---|---|---|
 | 1 | Data file | MDF / NDF | Relation files | WiredTiger files | InnoDB files | Datafile | Container |
 | 2 | Primary file | MDF | N/A | N/A | System tablespace | Datafile | Container |
 | 3 | Secondary file | NDF | N/A | N/A | Tablespace file | Datafile | Container |
-| 4 | Transaction log | LDF / T-Log | WAL | Journal | Redo Log | Redo Log | Transaction Log |
+| 4 | Transaction log | LDF / T-Log | WAL | Journal | Redo Log | Redo Log | T-Log |
 | 5 | Change log | T-Log | WAL | Oplog | Binary Log | Redo / Archive | Logs |
 | 6 | Logical storage | Filegroup | Tablespace | Collection | Tablespace | Tablespace | Tablespace |
 | 7 | Page / block | 8 KB Page | Usually 8 KB | WT Page | Usually 16 KB | DB Block | Page |
@@ -35,14 +35,14 @@
 
 ## 3. Database Objects
 
-| # | DBA Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
+| # | Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
 |---:|---|---|---|---|---|---|---|
 | 1 | Table | Table | Table | Collection | Table | Table | Table |
 | 2 | Row | Row | Row / Tuple | Document | Row | Row | Row |
 | 3 | Column | Column | Column | Field | Column | Column | Column |
 | 4 | Primary ID | PK | PK | `_id` | PK | PK | PK |
 | 5 | View | View | View | View | View | View | View |
-| 6 | Materialized view | Indexed View | Materialized View | Materialized pattern | No native MV | Materialized View | MQT |
+| 6 | Materialized view | Indexed View | Mat. View | Materialized pattern | No native MV | Mat. View | MQT |
 | 7 | Index | Index | Index | Index | Index | Index | Index |
 | 8 | Procedure | Procedure | Procedure | App/server logic | Procedure | Procedure | Procedure |
 | 9 | Function | Function | Function | Limited JS* | Function | Function | Function |
@@ -75,7 +75,7 @@
 
 ## 5. Transaction Terminology
 
-| # | DBA Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
+| # | Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
 |---:|---|---|---|---|---|---|---|
 | 1 | Transaction | Transaction | Transaction | Transaction | Transaction | Transaction | Unit of Work |
 | 2 | Commit | COMMIT | COMMIT | Commit txn | COMMIT | COMMIT | COMMIT |
@@ -141,7 +141,7 @@
 
 ## 10. Logging Terminology
 
-| # | DBA Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
+| # | Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
 |---:|---|---|---|---|---|---|---|
 | 1 | Transaction log | T-Log | WAL | Journal | Redo Log | Redo Log | T-Log |
 | 2 | Replication log | T-Log / CDC | WAL | Oplog | Binlog | Redo / Archive | Logs |
@@ -151,7 +151,7 @@
 
 ## 11. Backup Terminology
 
-| # | DBA Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
+| # | Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
 |---:|---|---|---|---|---|---|---|
 | 1 | Full backup | Full | Base Backup | Backup / Snapshot | Full | Full | Full |
 | 2 | Incremental | Differential | Tool/version dependent | Tool dependent | Tool dependent | RMAN Incremental | Incremental |
@@ -182,11 +182,11 @@
 
 ## 13. High Availability / Disaster Recovery
 
-| # | DBA Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
+| # | Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
 |---:|---|---|---|---|---|---|---|
 | 1 | HA technology | AG / FCI | Streaming Repl. + HA | Replica Set | InnoDB Cluster | RAC / Data Guard | HADR / pureScale |
-| 2 | Primary | Primary Replica | Primary | Primary | Primary | Primary | Primary |
-| 3 | Secondary | Secondary Replica | Standby | Secondary | Secondary | Standby | Standby |
+| 2 | Primary | Primary | Primary | Primary | Primary | Primary | Primary |
+| 3 | Secondary | Secondary | Standby | Secondary | Secondary | Standby | Standby |
 | 4 | Replication | AG / Replication | Streaming / Logical | Replica Set | Group / Async | Data Guard | HADR |
 | 5 | Cluster | WSFC | External HA stack | Sharded / Replica Set | InnoDB Cluster | RAC | pureScale |
 | 6 | Failover | Auto / Manual | HA-tool dependent | Election | Cluster mechanisms | RAC / DG | HADR |
@@ -202,7 +202,7 @@
 | 4 | Subscriber | Replication receiver |
 | 5 | Distributor | SQL Server replication intermediary |
 | 6 | Physical Replication | Copies physical/log changes |
-| 7 | Logical Replication | Replicates logical data changes |
+| 7 | Logical Repl. | Replicates logical data changes |
 | 8 | Synchronous | Commit waits per acknowledgement policy |
 | 9 | Asynchronous | Primary does not wait for remote durable ack |
 | 10 | Replication Lag | Replica is behind primary |
@@ -219,7 +219,7 @@
 
 ## 15. Index Terminology
 
-| # | DBA Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
+| # | Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
 |---:|---|---|---|---|---|---|---|
 | 1 | Main structure | Clustered often | Heap default | Collection + indexes | Clustered PK | Heap normally | Table + indexes |
 | 2 | Secondary | Nonclustered | B-tree etc. | Secondary | Secondary | B-tree | Index |
@@ -278,7 +278,7 @@
 
 ## 18. Statistics Terminology
 
-| # | DBA Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
+| # | Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
 |---:|---|---|---|---|---|---|---|
 | 1 | Statistics | Statistics | Statistics | Planner stats | Statistics | Optimizer Stats | Statistics |
 | 2 | Update stats | UPDATE STATISTICS | ANALYZE | Internal | ANALYZE TABLE | `DBMS_STATS` | RUNSTATS |
@@ -311,7 +311,7 @@
 
 ## 20. Memory Terminology
 
-| # | DBA Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
+| # | Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
 |---:|---|---|---|---|---|---|---|
 | 1 | Data cache | Buffer Pool | Shared Buffers | WT Cache | InnoDB Buffer Pool | Buffer Cache | Bufferpools |
 | 2 | Plan cache | Plan Cache | Prepared-plan model | Plan Cache | Statement caches | Shared Pool | Package Cache |
@@ -338,11 +338,11 @@
 | 13 | DMVs | Dynamic Management Views |
 | 14 | Extended Events | Diagnostics framework |
 | 15 | Query Store | Query/performance history |
-| 16 | Always On AG | Availability Groups |
+| 16 | Always On AG | AG |
 | 17 | FCI | Failover Cluster Instance |
 | 18 | Log Shipping | DR/log-copy technology |
 | 19 | Replication | Data distribution |
-| 20 | RCSI | Read Committed Snapshot Isolation |
+| 20 | RCSI | RCSI |
 | 21 | DBCC | Maintenance/consistency commands |
 | 22 | CHECKDB | Integrity checking |
 | 23 | SPID | Session/process ID |
@@ -368,8 +368,8 @@
 | 14 | `postgresql.conf` | Main configuration |
 | 15 | `pg_stat_activity` | Session monitoring |
 | 16 | `pg_stat_statements` | Query statistics |
-| 17 | Streaming Replication | Physical replication |
-| 18 | Logical Replication | Logical pub/sub |
+| 17 | Streaming Repl. | Physical replication |
+| 18 | Logical Repl. | Logical pub/sub |
 | 19 | Hot Standby | Read-capable standby |
 | 20 | `pg_basebackup` | Physical base backup |
 | 21 | `pg_dump` | Logical backup |
@@ -471,7 +471,7 @@
 | 5 | Container | Physical tablespace storage |
 | 6 | DBM CFG | DB Manager configuration |
 | 7 | DB CFG | Database configuration |
-| 8 | Transaction Log | Recovery log |
+| 8 | T-Log | Recovery log |
 | 9 | Active Log | Active transaction logs |
 | 10 | Archive Log | Archived logs |
 | 11 | HADR | HA/DR |
@@ -489,7 +489,7 @@
 
 ## 27. Security Terminology
 
-| # | DBA Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
+| # | Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
 |---:|---|---|---|---|---|---|---|
 | 1 | Identity | Login | Role / User | User | User | User | User / external |
 | 2 | Role | Server/DB Role | Role | Role | Role | Role | Role / Authority |
@@ -523,7 +523,7 @@
 
 ## 29. DBA Maintenance Terminology
 
-| # | DBA Task | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
+| # | Task | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2 |
 |---:|---|---|---|---|---|---|---|
 | 1 | Integrity | CHECKDB | Checks/tooling | Validation | CHECK TABLE | DBVERIFY/RMAN | INSPECT |
 | 2 | Statistics | UPDATE STATISTICS | ANALYZE | Planner mechanisms | ANALYZE TABLE | DBMS_STATS | RUNSTATS |
@@ -728,11 +728,3 @@
 | 11 | Lifecycle | Install → Configure → Secure → Monitor → Patch → Upgrade → Retire |
 
 ---
-
-### GitHub Display Note
-
-The cross-database tables intentionally keep these headers side by side:
-
-**DBA Concept | SQL Server | PostgreSQL | MongoDB | MySQL | Oracle | DB2**
-
-Cell text is kept compact to reduce horizontal width while preserving the comparison format.
