@@ -1,10 +1,15 @@
 Below is a production-oriented SOP tailored to the environment described below: 
 =============================================
 Ubuntu server: CPU 24 
+
 RAM 64 GB 
+
 storage type: HDD with 8 TB 
+
 number of databases 10 
+
 Databases Number of applications: 5
+
 ============================================
 
 Treating **PostgreSQL 18 as the reference release** and the configuration values as controlled starting points that must be validated under workload testing. 
